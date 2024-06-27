@@ -1,6 +1,6 @@
 ### Steps for Our Pipeline to Receive Email Notifications
 
-Now we will write the steps for our Pipeline for us to receive the email notifications. We will attach `Trivy report`. We already have "trivy-image-report.html" in our "Docker Image Scan" step. So copy the "trivy-image-report.html" and paste it in "attachmentsPattern: 'trivy-image-report.html'"
+Now we will write the steps for our Pipeline for us to receive the email notifications. We will attach `Trivy report` that we already have in our "Docker Image Scan" step by the name: "trivy-image-report.html". Copy the "trivy-image-report.html" and paste it in "attachmentsPattern: 'trivy-image-report.html'"
 
 **Ensure the `post` section starts at the same indentation level as the `pipeline` declaration to correctly configure the email notifications.**
                       
