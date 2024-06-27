@@ -1,6 +1,7 @@
 ### Steps for Our Pipeline to Receive Email Notifications
 
-Jenkins pipeline script with the necessary steps to configure the email notification correctly. 
+Now we will write the steps for our Pipeline for us to receive the email notifications. We will attach `Trivy report`. We already have "trivy-image-report.html" in our "Docker Image Scan" step. So copy the "trivy-image-report.html" and paste it in "attachmentsPattern: 'trivy-image-report.html'"
+
 **Ensure the `post` section starts at the same indentation level as the `pipeline` declaration to correctly configure the email notifications.**
                       
 ```groovy
