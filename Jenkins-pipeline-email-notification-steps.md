@@ -1,5 +1,3 @@
-Certainly! Here are the steps for configuring email notifications in your Jenkins pipeline:
-
 ### Steps for Our Pipeline to Receive Email Notifications
 
 Jenkins pipeline script with the necessary steps to configure the email notification correctly. 
