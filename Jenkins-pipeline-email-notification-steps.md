@@ -61,5 +61,3 @@ pipeline {
    - **Always Block:** Ensures the email notification script executes regardless of the build result.
    - **Script Block:** Gathers environment variables, determines the pipeline status, sets the banner color, and constructs the HTML body for the email.
    - **Email Notification (`emailext`):** Configures the email to be sent with the build details, HTML body, and attaches the specified report file.
-
-This complete pipeline script is ready to use in Jenkins and covers the typical stages of a CI/CD pipeline, including sending a detailed email notification after each build.
