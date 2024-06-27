@@ -1,55 +1,41 @@
 ### Steps for Our Pipeline to Receive Email Notifications
 
 Jenkins pipeline script with the necessary steps to configure the email notification correctly. 
-**Note that the `post` section is added immediately after the `pipeline` declaration, as required.**
-
+**Ensure the `post` section starts at the same indentation level as the `pipeline` declaration to correctly configure the email notifications.**
+                      
 ```groovy
-pipeline {
-    agent any
-    stages {
-        stage('Deploy') {
-            steps {
-                echo 'Deploying the application...'
-                // Add your deployment steps here, e.g., deploy to a server
-                // sh 'deploy-script.sh'
-            }
-        }
-    }
-**#DO NOT COPY THE ABOVE**
-**#Copy the below pipeline declaration and paste it in your Jenkins pipeline to configure the email notification correctly.**                         
-    post {
-        always {
-            script {
-                def jobName = env.JOB_NAME
-                def buildNumber = env.BUILD_NUMBER
-                def pipelineStatus = currentBuild.result ?: 'UNKNOWN'
-                def bannerColor = pipelineStatus.toUpperCase() == 'SUCCESS' ? 'green' : 'red'
-                def buildUrl = env.BUILD_URL
+post {
+    always {
+        script {
+            def jobName = env.JOB_NAME
+            def buildNumber = env.BUILD_NUMBER
+            def pipelineStatus = currentBuild.result ?: 'UNKNOWN'
+            def bannerColor = pipelineStatus.toUpperCase() == 'SUCCESS' ? 'green' : 'red'
+            def buildUrl = env.BUILD_URL
 
-                def body = """
-                    <html>
-                        <body>
-                            <div style="border: 4px solid ${bannerColor}; padding: 10px;">
-                                <h2>${jobName} - Build ${buildNumber}</h2>
-                                <div style="background-color: ${bannerColor}; padding: 10px;">
-                                    <h3 style="color: white;">Pipeline Status: ${pipelineStatus.toUpperCase()}</h3>
-                                </div>
-                                <p>Check the <a href="${buildUrl}">console output</a></p>
+            def body = """
+                <html>
+                    <body>
+                        <div style="border: 4px solid ${bannerColor}; padding: 10px;">
+                            <h2>${jobName} - Build ${buildNumber}</h2>
+                            <div style="background-color: ${bannerColor}; padding: 10px;">
+                                <h3 style="color: white;">Pipeline Status: ${pipelineStatus.toUpperCase()}</h3>
                             </div>
-                        </body>
-                    </html>
-                """
+                            <p>Check the <a href="${buildUrl}">console output</a></p>
+                        </div>
+                    </body>
+                </html>
+            """
 
-                emailext (
-                    to: 'echix@example.com',
-                    from: 'jenkins@example.com',
-                    replyTo: 'jenkins@example.com',
-                    subject: "Build ${buildNumber} - ${jobName} - ${pipelineStatus.toUpperCase()}",
-                    body: body,
-                    mimeType: 'text/html',
-                    attachmentsPattern: 'trivy-report.html'
-                )
-            }
+            emailext (
+                to: 'echix@example.com',
+                from: 'jenkins@example.com',
+                replyTo: 'jenkins@example.com',
+                subject: "Build ${buildNumber} - ${jobName} - ${pipelineStatus.toUpperCase()}",
+                body: body,
+                mimeType: 'text/html',
+                attachmentsPattern: 'trivy-report.html'
+            )
         }
     }
 }
