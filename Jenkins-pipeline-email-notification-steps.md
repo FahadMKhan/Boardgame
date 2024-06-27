@@ -34,7 +34,7 @@ post {
                 subject: "Build ${buildNumber} - ${jobName} - ${pipelineStatus.toUpperCase()}",
                 body: body,
                 mimeType: 'text/html',
-                attachmentsPattern: 'trivy-report.html'
+                attachmentsPattern: 'trivy-image-report.html'
             )
         }
     }
